@@ -1,0 +1,35 @@
+void helper(string S, vector<string>&ans, int visit[], string v ){
+	    //base case
+	    if(v.size()==S.size()){
+	        ans.push_back(v);
+	       return;
+	    }
+	    
+	    for(int i=0; i<S.size(); i++){
+	       if(!visit[i]){
+	       v.push_back(S[i]);
+	       visit[i]=1;
+	       helper(S, ans, visit, v);
+	       visit[i]=0;
+	       v.pop_back();
+	       }
+	    }
+	    
+	}
+		vector<string>find_permutation(string S)
+		{
+		    // Code here there
+		    string v;
+		    vector<string> ans;
+		    int visit[S.size()]={0};
+		    helper(S, ans, visit, v);//code upto permutation of string
+		    //code for lexicographiclly order
+		    sort(ans.begin(), ans.end());
+		    for(int i=0; i<ans.size()-1; i++){
+		        if(ans[i]==ans[i+1]){
+		            ans.erase(ans.begin()+i);
+		        }
+		    }
+		    
+		    return ans;
+		}
